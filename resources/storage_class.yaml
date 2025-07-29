@@ -1,7 +1,11 @@
 apiVersion: storage.k8s.io/v1
 kind: StorageClass
 metadata:
-  name: roboshop-ebs
+  name: roboshop-ebs-sc
 reclaimPolicy: Retain
 provisioner: ebs.csi.aws.com
-volumeBindingMode: WaitForFirstConsumer # disk will be created when pod is getting created
+volumeBindingMode: WaitForFirstConsumer 
+
+# It delays volume provisioning and binding until a Pod that uses the PVC is scheduled.
+
+# This is especially useful for zonal volumes like AWS EBS, where you don’t want to pre-provision a volume in a random zone that might not match the Pod’s zone.
